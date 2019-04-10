@@ -7,4 +7,5 @@
 <img src='images/diagram.png'>
 ## 데이터 분석
 무게 센서를 통해 재료의 남은 양을 알 수 있습니다. 수집된 무게 데이터는 와이파이를 통해 서버로 전송되고 서버에서는 남은 양에 따라 부족한지 여부를 판단합니다. 장을 볼 때가 됐다고 판단하면 프리자는 사용자에게 이메일, 혹은 어플리케이션 푸쉬 알림으로 사용자에게 알립니다. 다음과 같은 메시지로 말이죠.  
-<img src='freeza_notification.png'>
+
+<img src='images/freeza_alarm.jpeg'>
