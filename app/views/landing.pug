@@ -1,8 +1,22 @@
-extends layout
+doctype html
+html(lang='en')
+  include common/head.pug
+  +head("Freeza - Make Your Fridge Smart!")
+  body
+    header
+      include common/navbar.pug
+      +navbar()
+      .container
+        .row.align-items-center
+          .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
+            .h1.mb-3 Freeza: Make Your Fridge Smart!
+            p.lead aaa
+            p.lead.mb-4 bbb
+            form(action="/", method="POST")
+              .input-group.mb-3
+                input(name = "lead_email", type="email", placeholder="Enter your email address").form-control
+                .input-group-append
+                  button(type="submit").btn.btn-primary Get Started
+    include common/footer.pug
+    +footer()
 
-block content
-  h1= title
-  p Welcome to #{title}
-  form(action="/", method="POST")
-    input(name = "lead_email", type="email", placeholder="Enter your email address")
-    button(type="submit") Submit
