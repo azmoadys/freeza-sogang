@@ -1,7 +1,7 @@
 const models = require('../models')
 
 exports.get_landing = function(req, res, next) {
-  res.render('landing', { title: 'Freeza' });
+  res.render('landing', { title: 'Freeza', user: req.user });
 }
 
 exports.get_contact = function(req, res, next) {
