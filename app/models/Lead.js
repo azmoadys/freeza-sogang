@@ -1,11 +1,12 @@
-'use strict';
+/* jshint indent: 2 */
 
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Lead = sequelize.define('lead', {
+  var Lead = sequelize.define('Lead', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-
+      
       allowNull: false,
       primaryKey: true
     },

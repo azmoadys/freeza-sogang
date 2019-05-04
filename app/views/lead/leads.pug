@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   include ../common/head.pug
-  +head("Freeza - Make Your Fridge Smart!")
+  +head("Freeza - Leads")
   body
     header
       include ../common/navbar.pug
@@ -17,13 +17,15 @@ html(lang='en')
                   th(scope="col") Actions
                   th(scope="col")
                 tr
-              tbody
+              tbody                
                 for lead in leads
                   tr(id=lead.id)
                     td
                       span #{lead.email}
                     td
                       a(href="/lead/" + lead.id) Details
+                    td 
+                      button(onclick=`deleteLead('${lead.id}')`).btn.btn-primary Delete
     include ../common/footer.pug
     +footer()
-
+    script(src='/javascripts/leads.js')

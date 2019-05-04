@@ -1,17 +1,18 @@
+
 let LocalStrategy = require('passport-local').Strategy;
+
 let bcrypt = require('bcrypt');
 let models = require('./models');
 
 const validPassword = function(user, password) {
 	return bcrypt.compareSync(password, user.password);
 }
-
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done) {
 		done(null, user.id)
 	});
 	passport.deserializeUser(function(id, done) {
-		models.user.findOne({
+		models.User.findOne({
 			where: {
 				'id' : id
 			}
@@ -23,12 +24,12 @@ module.exports = function(passport) {
 		})
 	});
 	passport.use(new LocalStrategy({
-		usernameField : 'email',
-		passwordField : 'password',
-		passReqToCallback : true
+		usernameField: 'email', 
+		passwordField: 'password',
+		passReqToCallback: true
 	},
 	function(req, email, password, done) {
-		return models.user.findOne({
+		return models.User.findOne({
 			where: {
 				'email' : email
 			},

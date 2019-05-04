@@ -1,15 +1,13 @@
 mixin navbar(user)
   nav.navbar.navbar-expand.navbar-light.bg-light
     a(href="/", aria-label="Freeza").navbar-brand.mr-0.mr-md-2
-      img(src="/images/freeza.jpg", width="36", height="36")
+      img(src="/images/frieza.jpg", width="36", height="36")
     .collapse.navbar-collapse
       ul.navbar-nav.mr-auto
         li.nav-item
           a.nav-link(href="/") Home
         li.nav-item
           a.nav-link(href="/leads") Leads
-        li.nav-item
-          a.nav-link(href="/contact") Contact
     .navbar-right
       if user
         span.navbar-text Hello #{user.email}!
@@ -18,6 +16,8 @@ mixin navbar(user)
         li.nav-item
           a.nav-link(href="/signup") Sign up
         li.nav-item
-          a.nav-link(href="/login") Sign in
+          a.nav-link(href="/login") Login
         li.nav-item
           a.nav-link(href="/logout") Logout
+        li.nav-item
+          a.nav-link(href="/about") About Us

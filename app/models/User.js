@@ -1,11 +1,11 @@
-
+/* jshint indent: 2 */
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var user = sequelize.define('user', {
+  var User = sequelize.define('User', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-
+      
       allowNull: false,
       primaryKey: true
     },
@@ -29,7 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
+    },
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     }
   })
-  return user;
+  return User;
 }
