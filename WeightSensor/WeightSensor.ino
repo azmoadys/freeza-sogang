@@ -3,13 +3,14 @@
 #define Clk  12 //D6
 #define Dout 13 //D7
 
-float calibration_factor =2125;
+float calibration_factor =671.4;
 
 HX711  scale(Dout, Clk);
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Start");
+  Serial.print("calibration_factor : ");
+  Serial.println(calibration_factor);
   scale.begin(Dout, Clk);
   
   delay(500);
