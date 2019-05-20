@@ -24,6 +24,6 @@ void loop() {
    Serial.println(weight_1);
    delay(100);
    Serial.println(analogRead(Ain));
-  //wc.Send(weight);
+  wc.Send(weight_0,weight_1);
   delay(3000);
 }

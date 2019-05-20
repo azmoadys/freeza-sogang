@@ -26,6 +26,6 @@ float WeightClient::GetWeight_0(){
 int WeightClient::GetWeight_1(){
   return analogRead(fsrAnalogPin);
   }  
-void  WeightClient::Send(float weight){
-  net.Send(weight);
+void  WeightClient::Send(float weight_0, int weight_1){
+  net.Send(weight_0,weight_1);
   }

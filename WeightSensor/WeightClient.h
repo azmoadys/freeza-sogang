@@ -18,7 +18,7 @@ public:
   void begin(byte dout, byte pd_sck,int AnalogPin);
   float GetWeight_0();
   int GetWeight_1();
-  void  Send(float weight);
+  void  Send(float ,int);
 
 
 };

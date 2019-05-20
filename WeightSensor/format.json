@@ -1,6 +1,0 @@
-{
-	DID:<Device ID>,
-	weight_0:<weight from loadcell_0>,
-	weight_1:<weight from loadcell_1>
-
-}

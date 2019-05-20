@@ -24,34 +24,23 @@ void Network::begin(){
   Serial.println(ip);
   }
 
-void Network::Send(float weight){
-  /*
-  if (!client.connect(AWS_host, AWS_port)) {
+void Network::Send(float weight_0, int weight_1){
+WiFiClient client;
+if (!client.connect("54.180.115.85", 3000)) {
       Serial.println("connection failed. waiting for 5 sec...");
       delay(5000);
       return;
     }
-    
-    String request = AWS_msg;
-    request +=temper;
-    request +="&seq=";
-    request += String(seq);
-    request +="&ip=";
-    request +=ip.toString();
-    //client.print(request);
-    client.print(String("GET ") + request + " HTTP/1.1\r\n" +
-               "Host: " + AWS_host + "\r\n" + 
-               "Connection: close\r\n\r\n");
-
+ 
+   String request = "GET /get_data?";
+   request += "DID=a1b2c3";
+   request +="&weight_0=";
+   request +=weight_0;
+   request +="&weight_1=";
+   request +=weight_1;
    
-  Serial.println(request);
+  request += " HTTP/1.1\nHost: 54.180.115.85\nConnection: close\n\n"; 
+   client.print(request); 
+   Serial.println(request);
   client.stop();
-   */
-   String request = "/log?{<Json>}";
-   //request +="&seq=";
-   //request += String(seq);
-   request +=weight;
-   request +="&ip=";
-   request +=ip.toString();
-   Serial.println("Sending " + request);
-  }
+}
