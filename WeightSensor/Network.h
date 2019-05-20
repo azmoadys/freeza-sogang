@@ -11,13 +11,13 @@ class Network{
     const char* password = STAPSK;
     IPAddress ip;
     ESP8266WiFiMulti WiFiMulti;
-    WiFiClient client;
+    
     
   public:
     Network();
     ~Network();
     void begin();
-    void Send();
+    void Send(float weight_0, int weight_1);
 };
 
 #endif
