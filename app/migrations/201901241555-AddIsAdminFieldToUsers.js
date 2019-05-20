@@ -1,6 +1,4 @@
 'use strict';
-
-
 const columnAndTypes = [{
   name: 'is_admin',
   type: (Sequelize) => {

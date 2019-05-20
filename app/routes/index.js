@@ -3,6 +3,7 @@ var router = express.Router();
 
 let landing = require('../controllers/landing');
 let user = require('../controllers/user');
+let fridge = require('../controllers/fridge');
 
 let {isLoggedIn, hasAuth} = require('../middleware/hasAuth.js')
 
@@ -22,4 +23,8 @@ router.post('/lead/:lead_id/edit', hasAuth, landing.edit_lead);
 router.post('/lead/:lead_id/delete', hasAuth, landing.delete_lead);
 router.post('/lead/:lead_id/delete-json', hasAuth, landing.delete_lead_json)
 router.get('/about', landing.get_about);
+
+/* How to distinguish users? */
+router.get('/get_data/', fridge.get_ingredient_from_sensor);
+
 module.exports = router;

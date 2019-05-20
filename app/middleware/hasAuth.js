@@ -4,12 +4,14 @@ exports.isLoggedIn = function(req, res, next) {
 	if (req.user)
 		next();
 	else
-		next(createError(404, "Page does not exist."));
+		next(res.render('user/login', { formData: {}, errors: {} }));
 }
 
 exports.hasAuth = function(req, res, next) {
-	if (req.user && req.user.is_admin == true)
+	if (req.user && req.user.is_admin == true) {
+		console.log("Admin user [%j] approval.\n", req.user);
 		next();
+	}
 	else
 		next(createError(404, "Page does not exist."));
 }
