@@ -17,7 +17,7 @@ class Network{
     Network();
     ~Network();
     void begin();
-    void Send();
+    void Send(float weight);
 };
 
 #endif

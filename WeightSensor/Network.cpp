@@ -24,7 +24,7 @@ void Network::begin(){
   Serial.println(ip);
   }
 
-void Network::Send(){
+void Network::Send(float weight){
   /*
   if (!client.connect(AWS_host, AWS_port)) {
       Serial.println("connection failed. waiting for 5 sec...");
@@ -47,5 +47,11 @@ void Network::Send(){
   Serial.println(request);
   client.stop();
    */
-   Serial.println("Sending Somthing..");
+   String request = "/log?{<Json>}";
+   //request +="&seq=";
+   //request += String(seq);
+   request +=weight;
+   request +="&ip=";
+   request +=ip.toString();
+   Serial.println("Sending " + request);
   }

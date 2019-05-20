@@ -1,36 +1,29 @@
 
-#include "HX711.h"
-#include "Network.h"
+#include "WeightClient.h"
 
 #define Clk  12 //D6
 #define Dout 13 //D7
+#define Ain A0
 
-
-
-float calibration_factor =671.4;
-HX711  scale(Dout, Clk);
-Network net;
+WeightClient wc;
 
 void setup() {
   Serial.begin(115200);
-  
-  Serial.print("calibration_factor : ");
-  Serial.println(calibration_factor);
-  scale.begin(Dout, Clk);
+  wc.begin(Dout,Clk,Ain);
   delay(500);
-  scale.set_scale(calibration_factor);  //스케일 지정
-  scale.tare();  //스케일 설정
-
-  
-  delay(500);
-  net.begin();
-delay(500);
+  Serial.println('WeightClient Initialized');
 }
 
 void loop() {
-  float weight = scale.get_units();
-  Serial.print(weight);
+  float weight_0 = wc.GetWeight_0();
+  int weight_1 = wc.GetWeight_1();
+  Serial.print("loadcell_0 : ");
+  Serial.print(weight_0);
   Serial.println(" g");
-  net.Send();
-  delay(1000);
+   Serial.print("loadcell_1 : ");
+   Serial.println(weight_1);
+   delay(100);
+   Serial.println(analogRead(Ain));
+  //wc.Send(weight);
+  delay(3000);
 }
