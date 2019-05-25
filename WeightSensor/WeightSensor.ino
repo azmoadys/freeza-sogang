@@ -1,6 +1,7 @@
 
 #include "WeightClient.h"
 
+
 #define Clk  12 //D6
 #define Dout 13 //D7
 #define Ain A0
@@ -23,7 +24,6 @@ void loop() {
    Serial.print("loadcell_1 : ");
    Serial.println(weight_1);
    delay(100);
-   Serial.println(analogRead(Ain));
   wc.Send(weight_0,weight_1);
   delay(3000);
 }

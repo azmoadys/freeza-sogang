@@ -33,10 +33,9 @@ if (!client.connect("54.180.115.85", 3000)) {
     }
  
    String request = "GET /get_data?";
-   request += "DID=a1b2c3";
-   request +="&weight_0=";
+   request +="SID_0=";
    request +=weight_0;
-   request +="&weight_1=";
+   request +="&SID_1=";
    request +=weight_1;
    
   request += " HTTP/1.1\nHost: 54.180.115.85\nConnection: close\n\n"; 
