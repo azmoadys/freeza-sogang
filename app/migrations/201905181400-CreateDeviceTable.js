@@ -1,19 +1,14 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Fridge', {
-	  deviceID: {
+    return queryInterface.createTable('Devices', {
+	  id: {
 		allowNull: false,
 		primaryKey: true,
 		autoIncrement: true,
 		type: Sequelize.INTEGER,
       },
-      ownedBy: {
-        allowNull: false,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-      },
-      createdAt: {
+      filledAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
@@ -21,7 +16,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      ingredient: {
+      type: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -32,6 +27,6 @@ module.exports = {
     })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Fridge');
+    return queryInterface.dropTable('Devices');
   }
 };

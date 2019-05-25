@@ -1,7 +1,7 @@
 const models = require('../models')
 
 exports.get_ingredient_from_sensor = function(req, res) {
-  // input format: { "SID": id, "weight" : inGrams }
+  // input format: { "SID": id, "WEIGHT_0": inGrams, "WEIGHT_1": inGrams }
   // TODO: add this data to the proper user and in DB.
   console.log('Got %j', req.query);
   let sensorVal;
@@ -25,15 +25,12 @@ exports.display_ingredients = function(req, res) {
 }
 
 exports.get_register = function(req, res) {
-	res.render('fridge/register');
+	res.render('device/register');
 }
 
 exports.register_sensor = function(req, res) {
   // userID ~ SID mapping in DB (via Ownership table)
-    console.log("<<<<POST>>>>  ");
-    
 	console.log("got [%d]\n", req.body.SID);
-
 	return models.Ownership.create({
 		ID: req.user.id,
 		SID: req.body.SID

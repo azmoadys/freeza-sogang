@@ -1,20 +1,20 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Ownership', {
+    return queryInterface.createTable('Ownerships', {
 	  userID: {
 		allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      SID: {
+      deviceID: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
     })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Ownership');
+    return queryInterface.dropTable('Ownerships');
   }
 };
