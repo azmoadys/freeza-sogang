@@ -9,7 +9,6 @@ exports.get_about = function(req, res, next) {
   res.render('about');
 }
 exports.submit_lead = function(req, res, next) {
-
 	return models.Lead.create({
 		email: req.body.lead_email
 	}).then(lead => {

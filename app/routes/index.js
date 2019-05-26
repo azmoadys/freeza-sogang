@@ -29,5 +29,7 @@ router.get('/get_data/', device.get_ingredient_from_sensor);
 
 /* register. */
 router.get('/register_sensor', isLoggedIn, device.get_register);
-router.post('/register_sensor', isLoggedIn, device.register_sensor);
+router.post('/register_sensor', isLoggedIn, device.register_device);
+
+router.get('/view_device', isLoggedIn, device.show_status);
 module.exports = router;
