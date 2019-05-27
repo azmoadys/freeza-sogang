@@ -1,4 +1,4 @@
-#define USE_FSR01CE false
+#define USE_NETWORK false
 
 #include "HX711.h"
 #include "Network.h"
