@@ -1,4 +1,7 @@
 const models = require('../models') 
+
+
+/* Recieves sensor data via web. */
 exports.get_ingredient_from_sensor = function(req, res) {
 	// input format: { "SID": id, "WEIGHT": inGrams}
 	// TODO: add this data to the proper user and in DB.
@@ -13,8 +16,8 @@ exports.get_ingredient_from_sensor = function(req, res) {
 		if (owns !== null) {
 			//add to DB
 			return models.Device.create({
-				id: 0,
-				filledAt:  0,
+				id: req.query.SID,
+				filledAt:  Date.now(),
 				type: 0,
 				weight: req.query.WEIGHT
 			})
@@ -58,7 +61,9 @@ exports.register_device = function(req, res) {
 				deviceID: req.body.SID
 			});
 
-			return newOwns.save();
+			return newOwns.save().then(req => {
+				res.redirect('/');
+			});
 		}
 	}).catch(function(err) {
 		console.log(err, req.body.SID);

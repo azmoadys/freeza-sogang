@@ -1,19 +1,16 @@
 /* jshint indent: 2 */
 'use strict';
+
+/* How to deal with data? update row? or just keep them? */
 module.exports = (sequelize, DataTypes) => {
 	var Device = sequelize.define('Device', {
 		id: {
 			allowNull: false,
-			primaryKey: true,
-			autoIncrement: true,
 			type: DataTypes.INTEGER,
 		},
 		filledAt: {
 			allowNull: false,
-			type: DataTypes.DATE
-		},
-		updatedAt: {
-			allowNull: false,
+			primaryKey: true,
 			type: DataTypes.DATE
 		},
 		type: {

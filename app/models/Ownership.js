@@ -4,12 +4,12 @@ module.exports = (sequelize, DataTypes) => {
   var Ownership = sequelize.define('Ownership', {
 	  userID: {
 		allowNull: false,
-        primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
       deviceID: {
         allowNull: false,
+        primaryKey: true,
         type: DataTypes.INTEGER,
       }
   })

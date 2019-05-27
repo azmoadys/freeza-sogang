@@ -4,16 +4,11 @@ module.exports = {
     return queryInterface.createTable('Devices', {
 	  id: {
 		allowNull: false,
-		primaryKey: true,
-		autoIncrement: true,
 		type: Sequelize.INTEGER,
       },
       filledAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
+		primaryKey: true,
         type: Sequelize.DATE
       },
       type: {
