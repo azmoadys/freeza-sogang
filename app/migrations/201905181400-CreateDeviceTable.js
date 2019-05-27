@@ -22,7 +22,7 @@ module.exports = {
       },
       weight: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
     })
   },

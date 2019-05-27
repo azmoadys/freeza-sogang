@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		weight: {
 			allowNull: false,
-			type: DataTypes.INTEGER
+			type: DataTypes.FLOAT
 		},
 	})
 	return Device;

@@ -1,21 +1,33 @@
-const models = require('../models')
-
+const models = require('../models') 
 exports.get_ingredient_from_sensor = function(req, res) {
-	// input format: { "SID": id, "WEIGHT_0": inGrams, "WEIGHT_1": inGrams }
+	// input format: { "SID": id, "WEIGHT": inGrams}
 	// TODO: add this data to the proper user and in DB.
 	console.log('Got %j', req.query);
-	let sensorVal;
 
 	// TODO: find SID in DB.
-	// If not present, initiate createdAt
-	// find the recent SID in DB, compare. 
-	// If sensorVal has larger weight, add createdAt
-	// Otherwise, just add updatedAt.
-
-	// Add it to DB.
+	return models.Ownership.findOne({
+		where: {
+			deviceID: req.query.SID
+		}
+	}).then(owns => {
+		if (owns !== null) {
+			//add to DB
+			return models.Device.create({
+				id: 0,
+				filledAt:  0,
+				type: 0,
+				weight: req.query.WEIGHT
+			})
+		}
+		else {
+			console.log("Unregistered device detected. [%d]", req.query.SID);
+		}
+	})
 }
 
+/* For what? */
 exports.display_ingredients = function(req, res) {
+	/* Display the data. Using a graph? */
 	return models.Fridge.findAll().then(leads => {
 		res.render('lead/leads', { title: 'Express', leads: leads });
 	})
@@ -34,18 +46,23 @@ exports.register_device = function(req, res) {
 			deviceID: req.body.SID
 		}
 	}).then(owns => {
+		let newOwns;
 		if (owns !== null) {
 			console.log('Device re-register by user.\n');
 			res.redirect('/');
 		}
-		else 
-			return models.Ownership.create({
+		else  {
+			console.log('Register new device %j, %j.\n', req.user.id, req.body.SID);
+			newOwns = models.Ownership.build({
 				userID: req.user.id,
 				deviceID: req.body.SID
-			}).then(lead => {
-				res.redirect('/');
-			})
-	})
+			});
+
+			return newOwns.save();
+		}
+	}).catch(function(err) {
+		console.log(err, req.body.SID);
+	});
 }
 
 exports.show_status = function(req, res, next) {
