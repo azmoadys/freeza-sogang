@@ -1,0 +1,9 @@
+Using Redis & db_workers.
+
+
+TODOs
+
+Worker1: Add to DB.
+Worker2: Search DB every hour to find any sensors that need notification.
+         Notify via Telegram APIs (Bot?).
+Worker3: Data analysis techniques. Let's thing ..

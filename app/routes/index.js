@@ -32,4 +32,5 @@ router.get('/register_sensor', isLoggedIn, device.get_register);
 router.post('/register_sensor', isLoggedIn, device.register_device);
 
 router.get('/view_device', isLoggedIn, device.show_status);
+router.get('/view_device/details', device.display_ingredient_by_time);
 module.exports = router;

@@ -1,35 +1,19 @@
-const models = require('../models') 
+const models = require('../models');
 
+var redis = require('redis');
+var publisher = redis.createClient();
 
 /* Recieves sensor data via web. */
 exports.get_ingredient_from_sensor = function(req, res) {
-	// input format: { "SID": id, "WEIGHT": inGrams}
-	// TODO: add this data to the proper user and in DB.
-	console.log('Got %j', req.query);
+	publisher.publish("input_data", JSON.stringify(req.query), function(){
+		console.log('published %j\n', req.query);
+	});
 
-	// TODO: find SID in DB.
-	return models.Ownership.findOne({
-		where: {
-			deviceID: req.query.SID
-		}
-	}).then(owns => {
-		if (owns !== null) {
-			//add to DB
-			return models.Device.create({
-				id: req.query.SID,
-				filledAt:  Date.now(),
-				type: 0,
-				weight: req.query.WEIGHT
-			})
-		}
-		else {
-			console.log("Unregistered device detected. [%d]", req.query.SID);
-		}
-	})
+	res.end('Got' + JSON.stringify(req.query));
 }
 
 /* For what? */
-exports.display_ingredients = function(req, res) {
+exports.display_ingredient_by_time = function(req, res) {
 	/* Display the data. Using a graph? */
 	return models.Fridge.findAll().then(leads => {
 		res.render('lead/leads', { title: 'Express', leads: leads });
@@ -66,7 +50,7 @@ exports.register_device = function(req, res) {
 			});
 		}
 	}).catch(function(err) {
-		console.log(err, req.body.SID);
+		console.log(err);
 	});
 }
 
@@ -76,15 +60,26 @@ exports.show_status = function(req, res, next) {
 			userID : req.user.id
 		}
 	}).then(owns => {
+		/* OWNS is a list! */
 		console.log ('found %j\n', owns);
+		
+		let list = [];
+		var i;
+		/* list of device IDs. */
+		for (i = 0; i < owns.length; ++i)
+			list.push(owns[i].deviceID);
+
 		return models.Device.findAll({
 			/* Solve this! */
 			where : {
-				id: owns[0].deviceID
-			}
+				id: list
+			},
+			/* How to get only current data? */
 		}).then(devices => {
 			res.render('device/status', {devices: devices});
 		});
+	}).catch(function(err) {
+		console.log(err);
 	});
 }
 
