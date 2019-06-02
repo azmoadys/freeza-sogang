@@ -31,15 +31,18 @@ if (!client.connect("54.180.115.85", 3000)) {
       delay(5000);
       return;
     }
- 
    String request = "GET /get_data?";
-   request +="SID_0=";
-   request +=weight_0;
-   request +="&SID_1=";
-   request +=weight_1;
-   
+   request +="SID=1&WEIGHT=";
+   request +=weight_0;   
   request += " HTTP/1.1\nHost: 54.180.115.85\nConnection: close\n\n"; 
    client.print(request); 
-   Serial.println(request);
+   //Serial.println(request);
+   delay(100);
+  request = "GET /get_data?";
+   request +="SID=2&WEIGHT=";
+   request +=weight_1;   
+  request += " HTTP/1.1\nHost: 54.180.115.85\nConnection: close\n\n"; 
+   client.print(request); 
+   Serial.println("sending http request");
   client.stop();
 }
