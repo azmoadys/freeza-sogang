@@ -1,27 +1,29 @@
 /* jshint indent: 2 */
 'use strict';
 
-/* How to deal with data? update row? or just keep them? */
+/* Stores only current data. */
 module.exports = (sequelize, DataTypes) => {
 	var Device = sequelize.define('Device', {
 		id: {
 			allowNull: false,
-			type: DataTypes.INTEGER,
-		},
-		filledAt: {
-			allowNull: false,
 			primaryKey: true,
-			type: DataTypes.DATE
+			type: DataTypes.INTEGER,
 		},
 		type: {
 			allowNull: false,
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
 		},
 		weight: {
 			allowNull: false,
-			type: DataTypes.FLOAT
+			type: DataTypes.FLOAT,
 		},
-	})
+	});
+	
+	Device.associate = function (models){
+		Device.hasMany(models.History, {
+			foreignKey: 'device_id',
+			as: 'deviceDetails'
+		});
+	};
 	return Device;
 }
-

@@ -24,7 +24,19 @@ module.exports = (sequelize, DataTypes) => {
 		is_admin: {
 			type: DataTypes.BOOLEAN,
 			allowNull: true,
-		}
-	})
+		},
+	});
+
+	User.associate = function (models){
+		User.hasMany(models.Device, {
+			foreignKey: 'user_id',
+			as: 'deviceDetails'
+		});
+
+		User.hasMany(models.History, {
+			foreignKey: 'user_id',
+			as: 'historyDetails'
+		});
+	};
 	return User;
 }

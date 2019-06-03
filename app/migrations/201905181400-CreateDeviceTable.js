@@ -3,13 +3,18 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Devices', {
 	  id: {
+		primaryKey: true,
 		allowNull: false,
 		type: Sequelize.INTEGER,
       },
-      filledAt: {
+      user_id: {
         allowNull: false,
-		primaryKey: true,
-        type: Sequelize.DATE
+		type: Sequelize.UUID,
+		references: {
+			model: 'Users',
+			key: 'id'
+		}
+
       },
       type: {
         allowNull: false,
@@ -25,3 +30,4 @@ module.exports = {
     return queryInterface.dropTable('Devices');
   }
 };
+

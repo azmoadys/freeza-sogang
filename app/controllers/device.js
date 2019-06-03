@@ -12,74 +12,55 @@ exports.get_ingredient_from_sensor = function(req, res) {
 	res.end('Got' + JSON.stringify(req.query));
 }
 
+exports.get_register = function(req, res) {
+	res.render('device/register');
+}
+
+exports.register_device = function(req, res) {
+	console.log("Got [%d] from user.\n", req.body.SID);
+
+	return models.Device.findOne({
+		where: {
+			id: req.body.SID
+		}
+	}).then(device => {
+		/* Initialize Device info. */
+		if (device == null) {
+			return models.Device.create({
+				id: req.body.SID,
+				user_id: req.user.id,
+				type: req.body.TYPE,
+				weight: 0.0
+			}).then(res.redirect('/'));
+		}
+		else {
+			console.log('Device re-register by user.\n');
+			res.redirect('/');
+		}
+	}).catch(function(err) {
+		console.log(err);
+	});
+}
+
+/* Shows device status. */
+exports.show_status = function(req, res, next) {
+	return models.Device.findAll({
+		where: {
+			user_id: req.user.id
+		}
+	}).then(devices => {
+		res.render('device/status', {devices: devices});
+	}).catch(function(err) {
+		console.log(err);
+	});
+}
+
 /* For what? */
-exports.display_ingredient_by_time = function(req, res) {
+exports.display_device_history = function(req, res) {
 	/* Display the data. Using a graph? */
 	return models.Fridge.findAll().then(leads => {
 		res.render('lead/leads', { title: 'Express', leads: leads });
 	})
 }
 
-exports.get_register = function(req, res) {
-	res.render('device/register');
-}
-
-exports.register_device = function(req, res) {
-	// userID ~ SID mapping in DB (via Ownership table)
-	console.log("Got [%d] from user.\n", req.body.SID);
-
-	return models.Ownership.findOne({
-		where: {
-			deviceID: req.body.SID
-		}
-	}).then(owns => {
-		let newOwns;
-		if (owns !== null) {
-			console.log('Device re-register by user.\n');
-			res.redirect('/');
-		}
-		else  {
-			console.log('Register new device %j, %j.\n', req.user.id, req.body.SID);
-			newOwns = models.Ownership.build({
-				userID: req.user.id,
-				deviceID: req.body.SID
-			});
-
-			return newOwns.save().then(req => {
-				res.redirect('/');
-			});
-		}
-	}).catch(function(err) {
-		console.log(err);
-	});
-}
-
-exports.show_status = function(req, res, next) {
-	return models.Ownership.findAll({
-		where : {
-			userID : req.user.id
-		}
-	}).then(owns => {
-		/* OWNS is a list! */
-		console.log ('found %j\n', owns);
-		
-		let list = [];
-		var i;
-		/* list of device IDs. */
-		for (i = 0; i < owns.length; ++i)
-			list.push(owns[i].deviceID);
-
-		return models.Device.findAll({
-			/* Solve this! */
-			where : {
-				id: list
-			},
-			/* How to get only current data? */
-		}).then(devices => {
-			res.render('device/status', {devices: devices});
-		});
-	}).catch(function(err) {
-		console.log(err);
-	});
-}
 

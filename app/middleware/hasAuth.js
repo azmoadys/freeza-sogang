@@ -15,3 +15,8 @@ exports.hasAuth = function(req, res, next) {
 	else
 		next(createError(404, "Page does not exist."));
 }
+
+/* Is given device (how?) owned by current user? */
+exports.isOwner = function(req, res, next) {
+
+}

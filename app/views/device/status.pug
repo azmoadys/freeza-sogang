@@ -13,17 +13,22 @@ html(lang='en')
             table.table
               thead
                 tr
-                  th(scope="col") Ingredients
-                  th(scope="col") Left
-                  th(scope="col")
+                  th(scole="col") Device ID
+                  th(scole="col") Type
+                  th(scope="col") Weight
+                  th(scope="col") Analysis
                 tr
               tbody                
                 for device in devices
                   tr(id=device.id)
                     td
+                      span #{device.id}
+                    td
                       span #{device.type}
                     td
                       span #{device.weight}
+                    td
+                      a(href="/device/" + device.id) history
     include ../common/footer.pug
     +footer()
     script(src='/javascripts/leads.js')

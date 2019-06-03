@@ -10,11 +10,18 @@ html(lang='en')
         .row.align-items-center
           .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
             h1.mb-3 Register
-            p.lead Please enter your device's SID.
+            p Please enter your device's properties.
+
             form(action="/register_sensor", method="POST")
-              .input-group.mb-3
-                input(name="SID", type="integer", placeholder="Enter your SID (Sensor ID)").form-control
-                .input-group-append
-                  button(type="submit").btn.btn-primary Submit
+              div.form-group
+                label(for='SID') SID:
+                input#SID.form-control(type='integer', placeholder='Enter your SID', name='SID')
+
+              div.form-group
+                label(for='TYPE') Ingredient:
+                input#SID.form-control(type='text', placeholder='Enter ingredient', name='TYPE')
+
+              button.btn.btn-primary(type='submit') Register
+
     include ../common/footer.pug
     +footer()
