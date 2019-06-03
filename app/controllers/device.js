@@ -1,11 +1,11 @@
 const models = require('../models');
 
 var redis = require('redis');
-var publisher = redis.createClient();
+var redisClient = redis.createClient();
 
 /* Recieves sensor data via web. */
 exports.get_ingredient_from_sensor = function(req, res) {
-	publisher.publish("input_data", JSON.stringify(req.query), function(){
+	redisClient.publish("input_data", JSON.stringify(req.query), function(){
 		console.log('published %j\n', req.query);
 	});
 

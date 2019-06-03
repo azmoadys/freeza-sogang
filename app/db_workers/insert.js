@@ -1,9 +1,9 @@
 const models = require('../models');
 
 var redis = require("redis");
-var subscriber = redis.createClient();
+var redisClient = redis.createClient();
 
-subscriber.on("message", function (channel, message) {
+redisClient.on("message", function (channel, message) {
 	obj = JSON.parse(message);
 	return models.Device.findOne({
 		where: {
@@ -21,8 +21,15 @@ subscriber.on("message", function (channel, message) {
 				obj.device_id = obj.id;
 				delete obj.id;
 
-				return models.History.create(obj).then(lead => {
-					console.log('[DB_WORKER] insert\n');
+				return models.History.create(obj).then(history => {
+					console.log('[DB_WORKER] insert:');
+					console.log(history.dataValues);
+
+					redisClient.publish("inserted_data", JSON.stringify(history.dataValues), function(){
+						console.log('... & published');
+					});
+
+
 				}).catch(function(err) {
 					console.log(err);
 				});
@@ -35,4 +42,4 @@ subscriber.on("message", function (channel, message) {
 	});
 });
 
-subscriber.subscribe("input_data");
+redisClient.subscribe("input_data");
