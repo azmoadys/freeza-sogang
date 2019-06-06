@@ -32,9 +32,10 @@ router.get('/register_sensor', isLoggedIn, device.get_register);
 router.post('/register_sensor', isLoggedIn, device.register_device);
 
 router.get('/view_device', isLoggedIn, device.show_status);
-router.get('/view_device/details', device.display_device_history);
+router.get('/view_device/history/:device_id', device.display_device_history);
+
 
 router.get('/test', function (req, res) {
-	res.render('device/curve');
-})
+	res.render('device/test');
+});
 module.exports = router;

@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	});
 	
+	/* Foregin Key for History. */
 	Device.associate = function (models){
 		Device.hasMany(models.History, {
 			foreignKey: 'device_id',

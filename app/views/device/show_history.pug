@@ -1,7 +1,8 @@
 doctype html
 html(lang='en')
   include ../common/head.pug
-  +head("Freeza - Your Fridge")
+  +head("Freeza - History")
+
   body
     header
       include ../common/navbar.pug
@@ -9,26 +10,20 @@ html(lang='en')
       .container
         .row.align-items-center
           .col-md-6.order-md-1.text-center.text-md-left.pr-md-5
-            h1 Inside your fridge
+            h1 History
             table.table
               thead
                 tr
-                  th(scole="col") Device ID
-                  th(scole="col") Type
+                  th(scope="col") Timestamp
                   th(scope="col") Weight
-                  th(scope="col") Analysis
                 tr
               tbody                
-                for device in devices
-                  tr(id=device.id)
+                for record in history
+                  tr(id=record.user_id)
                     td
-                      span #{device.id}
+                      span #{record.updatedAt}
                     td
-                      span #{device.type}
-                    td
-                      span #{device.weight}
-                    td
-                      a(href="/view_device/history/" + device.id) history
+                      span #{record.weight}
     include ../common/footer.pug
     +footer()
     script(src='/javascripts/leads.js')

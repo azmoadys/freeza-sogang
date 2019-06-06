@@ -57,10 +57,14 @@ exports.show_status = function(req, res, next) {
 
 /* For what? */
 exports.display_device_history = function(req, res) {
+	console.log('view history');
 	/* Display the data. Using a graph? */
-	return models.Fridge.findAll().then(leads => {
-		res.render('lead/leads', { title: 'Express', leads: leads });
-	})
+	return models.History.findAll({
+		where : {
+			device_id : req.params.device_id
+		}
+	}).then(history => {
+		res.render('device/show_history', { history : history });
+	});
 }
-
 

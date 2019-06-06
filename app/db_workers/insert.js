@@ -21,15 +21,15 @@ redisClient.on("message", function (channel, message) {
 				obj.device_id = obj.id;
 				delete obj.id;
 
+				/* Add to device history. */
 				return models.History.create(obj).then(history => {
 					console.log('[DB_WORKER] insert:');
 					console.log(history.dataValues);
 
+					/* Publish not working. Why? */
 					redisClient.publish("inserted_data", JSON.stringify(history.dataValues), function(){
 						console.log('... & published');
 					});
-
-
 				}).catch(function(err) {
 					console.log(err);
 				});
