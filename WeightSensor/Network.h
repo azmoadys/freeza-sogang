@@ -17,7 +17,8 @@ class Network{
     Network();
     ~Network();
     void begin();
-    void Send(float weight_0, int weight_1);
+    int SendWeight(int ID, float weight);
+    int SendWarning(int ID);
 };
 
 #endif

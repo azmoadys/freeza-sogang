@@ -22,8 +22,7 @@ void loop() {
   Serial.println(" g");
   Serial.print("loadcell_1 : ");
   Serial.println(weight_1);
-  delay(100);
+  delay(500);
   
   wc.Send(weight_0,weight_1);
-  delay(1000);
 }
