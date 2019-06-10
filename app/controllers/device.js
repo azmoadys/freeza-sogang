@@ -73,10 +73,7 @@ exports.display_device_history = function(req, res) {
 			history_list.push([date.addHours(history[i].updatedAt, 9), history[i].weight]);
 		}
 
-		console.log(history_list);
-
 		res.render('device/test', { type: history[0].type, history_list : history_list });
-		//res.render('device/show_history', { history : history });
 	});
 }
 

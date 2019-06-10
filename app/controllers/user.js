@@ -37,6 +37,7 @@ exports.signup = function(req, res, next) {
 				if (user !== null) {
 					/* Create normal user. */
 					newUser = models.User.build({
+						username: req.body.username,
 						email: req.body.email,
 						password: generateHash(req.body.password)
 					});					

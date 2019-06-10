@@ -23,6 +23,8 @@ html(lang='en')
                       input(placeholder='New Password',required=true, name='password', type='password', value='').form-control
                       if (errors && errors.password)
                         p.small.text-danger #{errors.password}
+                      label.small.mb-1.mt-3 Username:
+                      input(placeholder='Your name',required=true, name='username', type='string', value='').form-control
                       button.mt-3.btn.btn-primary(type='submit') Sign up
                       p.mt-2.mb-0
                         | Already have an account? #[a(href="/login") Log in here].
