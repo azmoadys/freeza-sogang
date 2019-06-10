@@ -1,2 +1,63 @@
-script
-  include chart.html
+doctype html
+html(lang='en')
+  include ../common/head.pug
+  +head("Freeza - History")
+  head
+    script(type="text/javascript" src="https://www.gstatic.com/charts/loader.js").
+    script(type="text/javascript").
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Time of Day');
+        data.addColumn('number', 'Weight');
+
+        var i;
+        var raw = !{JSON.stringify(history_list)};
+        var values = [];
+
+        for (i = 0; i < raw.length; ++i)
+          values.push([new Date(raw[i][0]), raw[i][1]]); 
+
+        console.log(raw);
+        data.addRows(values);
+        var options = {
+          title: 'History of ' + !{JSON.stringify(type)},
+          width: 900,
+          height: 500,
+
+          hAxis: {
+            format: 'M/d/yy',
+            gridlines: {count: 15}
+          },
+          vAxis: {
+            gridlines: {color: 'none'},
+            minValue: 0
+          }
+        };
+        
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        
+        chart.draw(data, options);
+        
+        var button = document.getElementById('change');
+        
+        button.onclick = function () {
+        
+          // If the format option matches, change it to the new option,
+          // if not, reset it to the original format.
+          options.hAxis.format === 'M/d/yy' ?
+            options.hAxis.format = 'MMM dd, yyyy' :
+            options.hAxis.format = 'yy/M/d';
+        
+          chart.draw(data, options);
+        };
+      }
+  body
+    header
+      include ../common/navbar.pug
+      +navbar()
+      div.container(id = 'chart_div')
+    include ../common/footer.pug
+    +footer()

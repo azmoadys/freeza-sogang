@@ -1,4 +1,5 @@
 const models = require('../models');
+const date = require('date-and-time');
 
 var redis = require('redis');
 var redisClient = redis.createClient();
@@ -64,7 +65,18 @@ exports.display_device_history = function(req, res) {
 			device_id : req.params.device_id
 		}
 	}).then(history => {
-		res.render('device/show_history', { history : history });
+		/* For Google charts. */
+		var i;
+		var history_list = [];
+
+		for(i = 0; i < history.length; ++i){
+			history_list.push([date.addHours(history[i].updatedAt, 9), history[i].weight]);
+		}
+
+		console.log(history_list);
+
+		res.render('device/test', { type: history[0].type, history_list : history_list });
+		//res.render('device/show_history', { history : history });
 	});
 }
 

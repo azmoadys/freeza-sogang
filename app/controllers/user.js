@@ -1,4 +1,3 @@
-
 let models = require("../models");
 let bcrypt = require("bcrypt");
 const passport = require('passport');
