@@ -1,7 +1,8 @@
-#define USE_NETWORK true
+#define USE_NETWORK false
 
 #include "HX711.h"
 #include "Network.h"
+#include "Sensor.h"
 
 
 class WeightClient{
@@ -11,26 +12,18 @@ Network net;
 HX711  scale;
 int fsrAnalogPin;
 
-/* 시작 */
-bool inited;
+Sensor * s1,*s2;
+
 /* 무게 측정 */
-const float calibration_factor_0=671.4;
-const float calibration_factor_1=0.66;
-// threshold for sensor 0, unit is gram.
-const float threshold_0 = 50;
-const float threshold_1 = 50;
-int init_weight_1;
-float prev_weight_0;
-float prev_weight_1;
-
+const float calibration_factor_1=671.4;
+const float calibration_factor_2=0.66;
 const int times = 24;
+// threshold for sensor 0, unit is gram.
 
-/* 방치 확인 */
-const float zero_0 = 10;
-bool flag_zero;
-unsigned long last_abandoned;
-unsigned long first_abandoned;
-const unsigned long SEC = 1000;
+const float threshold_1 = 30;
+const float threshold_2 = 30;
+int init_weight_2;
+
 const unsigned long dur_zero = 13;
 
 const int led_send = 10; // SD3
@@ -38,10 +31,11 @@ const int led_send = 10; // SD3
 const int led_zero = 4; //D2
 public:
   WeightClient();
+  ~WeightClient();
+
   void begin(byte dout, byte pd_sck,int AnalogPin);
-  float GetWeight_0();
   float GetWeight_1();
+  float GetWeight_2();
   void  Send(float ,float);
-
-
+  void  SwtichReturn(int ret,int val,int led_send,int led_zero);
 };
