@@ -4,6 +4,7 @@
 #include "Network.h"
 #include "Sensor.h"
 
+#define DELAY 1000
 
 class WeightClient{
 
@@ -21,14 +22,17 @@ const int times = 24;
 // threshold for sensor 0, unit is gram.
 
 const float threshold_1 = 30;
-const float threshold_2 = 30;
+const float threshold_2 = 50;
 int init_weight_2;
 
 const unsigned long dur_zero = 13;
 
-const int led_send = 10; // SD3
+const int led_send_1 = 10; // SD3
 // SD2 : 9 - GPIO9 is internally used to control the flash memory.  [https://github.com/esp8266/Arduino/issues/1446]
-const int led_zero = 4; //D2
+const int led_zero_1 = 4; //D2
+
+const int led_send_2 = 15;//15; // D8
+const int led_zero_2 = 2;//D4;
 public:
   WeightClient();
   ~WeightClient();
@@ -37,5 +41,6 @@ public:
   float GetWeight_1();
   float GetWeight_2();
   void  Send(float ,float);
-  void  SwtichReturn(int ret,int val,int led_send,int led_zero);
+  void  SwitchReturn_1(int ret,int val,int led_send,int led_zero);
+  void  SwitchReturn_2(int ret,int val,int led_send,int led_zero);
 };
