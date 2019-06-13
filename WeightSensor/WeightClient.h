@@ -1,5 +1,3 @@
-#define USE_NETWORK false
-
 #include "HX711.h"
 #include "Network.h"
 #include "Sensor.h"
@@ -21,7 +19,7 @@ const float calibration_factor_2=0.66;
 const int times = 24;
 // threshold for sensor 0, unit is gram.
 
-const float threshold_1 = 30;
+const float threshold_1 = 50;
 const float threshold_2 = 50;
 int init_weight_2;
 

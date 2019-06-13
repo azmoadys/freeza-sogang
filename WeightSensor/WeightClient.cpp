@@ -98,7 +98,7 @@ void WeightClient::SwitchReturn_1(int ret,int val,int led_send,int led_zero){
 void WeightClient::SwitchReturn_2(int ret,int val,int led_send,int led_zero){
    switch(ret){
      case 1:
-      net.SendWeight(1,val);
+      net.SendWeight(2,val);
       digitalWrite(led_send,HIGH);
       delay(300);
       digitalWrite(led_send,LOW);
@@ -108,7 +108,7 @@ void WeightClient::SwitchReturn_2(int ret,int val,int led_send,int led_zero){
       digitalWrite(led_send,LOW);
       break;     
     case -1:
-      net.SendWeight(1,-1);
+      net.SendWeight(2,-1);
       digitalWrite(led_zero,HIGH);
       delay(300);
       digitalWrite(led_zero,LOW);

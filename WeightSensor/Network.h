@@ -1,6 +1,9 @@
 #ifndef _H_NET_
 #define _H_NET_
 
+#define USE_NETWORK true
+
+
 #include "secret.h" 
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
