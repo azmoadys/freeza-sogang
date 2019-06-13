@@ -31,7 +31,7 @@ WiFiClient client;
 if (!client.connect("54.180.115.85", 3000)) {
       Serial.println("connection failed. waiting for 5 sec...");
       delay(5000);
-      return;
+      return 0;
     }
    String request = "GET /get_data?";
    request +="SID=";
@@ -41,7 +41,8 @@ if (!client.connect("54.180.115.85", 3000)) {
   request += " HTTP/1.1\nHost: 54.180.115.85\nConnection: close\n\n"; 
    client.print(request); 
    client.stop();
-   Serial.println("Send");
+   Serial.print(id);
+   Serial.println(" Send");
    delay(100);
    #endif   
    return 1;

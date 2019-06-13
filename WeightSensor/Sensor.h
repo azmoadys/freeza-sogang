@@ -31,11 +31,13 @@ public:
 
 int Check_LoadCell(float weight){
 /******************************************************************/
+/*
      String t="";
      t+=weight;
      t+=" ";
      t+=prev_weight;
      Serial.println(t);
+     */
    if(is_init && weight < threshold){
       //이미 zero 측정중.
       if(flag_zero){
